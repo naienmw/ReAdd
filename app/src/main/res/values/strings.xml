@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">ReAdd</string>
     <string name="action_settings">Settings</string>
+    <string name="second_activity_name">Second</string>
+    <string name="arrow_rotation">50</string>
+    <string name="button_text">click me</string>
 </resources>

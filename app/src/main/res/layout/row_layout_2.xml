@@ -14,7 +14,7 @@
         android:layout_gravity="center"
         android:src="@drawable/arrow"
         android:id="@+id/imageView1"
-        android:layout_marginLeft="8dp"
+        android:rotation="0"
         />
 
     <TextView
@@ -34,5 +34,5 @@
         android:textSize="20sp"
         android:textStyle="normal"
         android:padding="15dp"
-        android:layout_gravity="center"/>
+        android:layout_gravity="center" />
 </LinearLayout>

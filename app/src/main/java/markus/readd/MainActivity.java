@@ -1,5 +1,7 @@
 package markus.readd;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -17,14 +19,19 @@ import android.widget.Toast;
 import markus.readd.R;
 
 public class MainActivity extends AppCompatActivity {
-//ist das behindertttttttttttttttttttttttt
+
+    public int rot_Angle;
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         String[] favoriteTVShows ={"The Office", "Breaking Bad", "The Help",
                 "Walking Dead", "Twin Peaks", "Freaks and Geeks", "Orphan Black", "Breakding Bad", "The 400", "Life on Mars", "Orphan Black", "Breakding Bad", "The 400", "Life on Mars"};
+
+
 
         //final ListAdapter theAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,
         // favoriteTVShows);
@@ -40,15 +47,22 @@ public class MainActivity extends AppCompatActivity {
 
         theListView.setAdapter(theAdapter);
 
+       /* SharedPreferences myStorage = this.getSharedPreferences("my_prefs",MODE_WORLD_READABLE);
+        SharedPreferences.Editor prefsEdit = myStorage.edit();
+        prefsEdit.putInt("Angle",rot_Angle);
+        prefsEdit.commit();*/
+        final Intent second_activity = new Intent(this, Second_Activity.class);
         theListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+
+                second_activity.putExtra("Angle",rot_Angle);
                 String tvShowPicked = "You Selected " +
                         String.valueOf(adapterView.getItemAtPosition(position));
                 Toast.makeText(MainActivity.this, tvShowPicked, Toast.LENGTH_SHORT).show();
+                startActivityForResult(second_activity, 1);
             }
         });
-
 
     }
 
@@ -59,7 +73,16 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1) {
+            if (resultCode == 1) {
+                rot_Angle = data.getIntExtra("angle", 0);
+            }
+        }
+    }
+
+        @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
@@ -73,4 +96,6 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+
 }
